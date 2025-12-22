@@ -5,6 +5,8 @@ import ProfilePage from "../features/user/pages/ProfilePage";
 import EditProfilePage from "../features/user/pages/EditProfilePage";
 import ProtectedRoute from "../components/common/ProtectedRoute";
 import AppLayout from "../components/layout/AppLayout";
+import FeedPage from "../features/posts/pages/FeedPage";
+import PostDetailPage from "../features/posts/pages/PostDetailPage";
 
 export default function AppRoutes() {
   return (
@@ -28,6 +30,24 @@ export default function AppRoutes() {
           element={
             <ProtectedRoute>
               <EditProfilePage />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/feed"
+          element={
+            <ProtectedRoute>
+              <FeedPage />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/posts/:id"
+          element={
+            <ProtectedRoute>
+              <PostDetailPage />
             </ProtectedRoute>
           }
         />

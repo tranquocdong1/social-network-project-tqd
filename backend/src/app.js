@@ -1,8 +1,10 @@
 const express = require("express");
 const cors = require("cors");
+const path = require("path");
 
 const authRoutes = require("./modules/auth/auth.routes");
 const userRoutes = require("./modules/users/users.routes");
+const postsRoutes = require("./modules/posts/posts.routes")
 const errorHandler = require("./middlewares/errorHandler");
 const notFound = require("./middlewares/notFound");
 
@@ -13,11 +15,12 @@ app.use(cors({
     credentials: true
 }));
 app.use(express.json());
-
+app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
 app.get("/health", (_req, res) => res.json({ ok: true }));
 
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
+app.use("/posts", postsRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
