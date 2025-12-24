@@ -14,6 +14,8 @@ const sanitizePost = (post) => ({
   authorId: post.authorId && post.authorId._id ? post.authorId._id.toString() : post.authorId.toString(),
   content: post.content,
   images: post.images || [],
+  likeCount: post.likeCount ?? 0,
+  commentCount: post.commentCount ?? 0,
   visibility: post.visibility,
   status: post.status,
   createdAt: post.createdAt,
@@ -58,7 +60,8 @@ exports.getFeed = async ({ limit = 10, cursor }) => {
   const posts = await Post.find(query)
     .sort({ createdAt: -1 })
     .limit(safeLimit)
-    .populate("authorId", "fullName avatar");
+    .populate("authorId", "fullName avatar")
+    .select("content images likeCount commentCount createdAt updatedAt authorId");
 
   const items = posts.map(sanitizePost);
   const nextCursor = items.length > 0 ? items[items.length - 1].createdAt.toISOString() : null;

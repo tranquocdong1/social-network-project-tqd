@@ -2,11 +2,23 @@ const mongoose = require("mongoose");
 
 const postSchema = new mongoose.Schema(
   {
-    authorId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true, index: true },
+    authorId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+      index: true,
+    },
     content: { type: String, default: "" },
-    images: { type: [String], default: [] }, // URLs
+    images: { type: [String], default: [] },
     visibility: { type: String, enum: ["public"], default: "public" },
-    status: { type: String, enum: ["active", "deleted"], default: "active", index: true },
+    status: {
+      type: String,
+      enum: ["active", "deleted"],
+      default: "active",
+      index: true,
+    },
+    likeCount: { type: Number, default: 0 },
+    commentCount: { type: Number, default: 0 },
   },
   { timestamps: true }
 );

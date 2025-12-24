@@ -5,6 +5,7 @@ const path = require("path");
 const authRoutes = require("./modules/auth/auth.routes");
 const userRoutes = require("./modules/users/users.routes");
 const postsRoutes = require("./modules/posts/posts.routes")
+const interactionRoutes = require("./modules/interactions/interaction.routes")
 const errorHandler = require("./middlewares/errorHandler");
 const notFound = require("./middlewares/notFound");
 
@@ -21,6 +22,7 @@ app.get("/health", (_req, res) => res.json({ ok: true }));
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
 app.use("/posts", postsRoutes);
+app.use("/", interactionRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
