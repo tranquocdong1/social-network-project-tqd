@@ -2,10 +2,34 @@ const mongoose = require("mongoose");
 
 const commentSchema = new mongoose.Schema(
   {
-    postId: { type: mongoose.Schema.Types.ObjectId, ref: "Post", required: true },
-    authorId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+    postId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Post",
+      required: true,
+    },
+    authorId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
     content: { type: String, required: true },
     status: { type: String, enum: ["active", "deleted"], default: "active" },
+    parentId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Comment",
+      default: null,
+    },
+
+    rootId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Comment",
+      default: null,
+    },
+
+    depth: {
+      type: Number,
+      default: 0,
+    },
   },
   { timestamps: true }
 );

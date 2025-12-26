@@ -18,3 +18,11 @@ export const getCommentsApi = (postId, params = {}) => {
 
 export const deleteCommentApi = (commentId) =>
   axiosClient.delete(`/comments/${commentId}`);
+
+// REPLY COMMENT 
+export const getRepliesApi = (commentId) =>
+  axiosClient.get(`/comments/${commentId}/replies`);
+
+export const createReplyApi = (commentId, payload) =>
+  axiosClient.post(`/comments/${commentId}/replies`, payload);
+

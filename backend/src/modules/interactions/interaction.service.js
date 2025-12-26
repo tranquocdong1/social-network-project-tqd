@@ -68,7 +68,7 @@ exports.createComment = async ({ postId, userId, content }) => {
 };
 
 exports.getComments = async ({ postId, limit = 10, cursor }) => {
-  const query = { postId, status: "active" };
+  const query = { postId, status: "active", parentId: null };
   if (cursor) query.createdAt = { $lt: new Date(cursor) };
 
   const comments = await Comment.find(query)
