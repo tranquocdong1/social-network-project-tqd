@@ -38,6 +38,9 @@ export default function AppNavbar() {
                 <li className="nav-item">
                   <NavLink className="nav-link" to="/profile/edit">Edit</NavLink>
                 </li>
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="/feed">Feed</NavLink>
+                </li>
               </>
             )}
           </ul>

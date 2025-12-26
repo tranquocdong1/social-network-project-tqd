@@ -5,6 +5,7 @@ import ReplyButton from "../reply/components/ReplyButton";
 import ReplyBox from "../reply/components/ReplyBox";
 import ReplyList from "../reply/components/ReplyList";
 import useReplies from "../reply/hooks/useReplies";
+import CommentLikeButton from "../comment-like/components/CommentLikeButton";
 
 export default function CommentItem({ comment, onDelete }) {
   const { user } = useAuth();
@@ -38,7 +39,9 @@ export default function CommentItem({ comment, onDelete }) {
         )}
       </div>
 
-      <div className="mt-1">
+      <div className="mt-1 d-flex gap-3 align-items-center">
+        <CommentLikeButton comment={comment} />
+
         <ReplyButton
           onClick={() => {
             setShowReplies((v) => !v);
@@ -52,7 +55,9 @@ export default function CommentItem({ comment, onDelete }) {
           <ReplyBox onSubmit={addReply} loading={submitting} />
 
           {loading && (
-            <div className="text-muted small mt-1">Loading replies...</div>
+            <div className="text-muted small mt-1">
+              Loading replies...
+            </div>
           )}
 
           {error && (

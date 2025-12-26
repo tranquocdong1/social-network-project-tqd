@@ -26,3 +26,12 @@ export const getRepliesApi = (commentId) =>
 export const createReplyApi = (commentId, payload) =>
   axiosClient.post(`/comments/${commentId}/replies`, payload);
 
+// LIKE COMMENT
+
+export const toggleCommentLikeApi = (commentId) =>
+  axiosClient.post(`/comments/${commentId}/like`);
+
+export const checkCommentLikedApi = (commentId) =>
+  axiosClient.get(`/comments/${commentId}/likes/me`);
+
+

@@ -74,7 +74,8 @@ exports.getComments = async ({ postId, limit = 10, cursor }) => {
   const comments = await Comment.find(query)
     .sort({ createdAt: -1 })
     .limit(Math.min(limit, 50))
-    .populate("authorId", "fullName avatar");
+    .populate("authorId", "fullName avatar")
+    .select("content author createdAt likeCount");
 
   const items = comments.map((c) => ({
     id: c._id,
@@ -85,6 +86,7 @@ exports.getComments = async ({ postId, limit = 10, cursor }) => {
     },
     content: c.content,
     createdAt: c.createdAt,
+    likeCount: c.likeCount ?? 0,
   }));
 
   return {
